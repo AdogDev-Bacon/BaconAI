@@ -60,7 +60,7 @@ These mechanisms are especially vital in the Web3 ecosystem, where malicious use
 ---
 ## Installation
 ```
-git clone https://github.com/ADevDog/BaconAI.git
+git clone https://github.com/AdogDev-Bacon/BaconAI
 cd BaconAI
 pip install -e .
 ```
