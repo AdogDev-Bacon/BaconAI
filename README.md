@@ -68,7 +68,9 @@ pip install -e .
 ---
 ### Building your own AI agent
 
-Users can customize their own AI agents by providing config files and fine-tune data under corresponding directories.
+#### Quick Start
+
+Users can customize their own AI agents by first providing config files and fine-tune data under corresponding directories.
 ```
 |-- examples/
 |   |-- chatbot/
@@ -79,9 +81,30 @@ Users can customize their own AI agents by providing config files and fine-tune 
 |   |-- agents/
 |   |   |--datasets/
 |   |   |   |--data/
-
         
 ```
+
+Then in run_train.py, users can add their OpenAI API key and dataset configs to fine-tune a customized AI agent. 
+
+```
+import os
+from agents import PREDEFINED_DATASET
+import litellm
+from agents.optimization.trainer import Trainer, TrainerConfig
+
+os.environ["OPENAI_API_KEY"] = OPENAI_KEY
+os.environ["OPENAI_BASE_URL"] = OPENAI_BASE_URL
+
+litellm.set_verbose = False
+
+if __name__ == "__main__":
+    dataset = PREDEFINED_DATASET(split="train")
+    trainer_config_path = CONFIG_DIRECTORY
+    trainer = Trainer(config=TrainerConfig(
+        trainer_config_path), dataset=dataset)
+    trainer.train()
+```
+
 ---
 ### To-do
 - Enable the agent to access and perform operations on crypto wallets.
